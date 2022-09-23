@@ -13,9 +13,9 @@ def login_page(request):
             )
             if user is not None:
                 login(request, user)
-                message = f'Bonjour, {user.username}! Vous êtes connecté.'
+                message = f'Hi, {user.username}! You\'re logged in.'
             else:
-                message = 'Identifiants invalides.'
+                message = 'Invalid credentials .'
     else:
         form = forms.LoginForm()
     return render(
