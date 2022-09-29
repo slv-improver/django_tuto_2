@@ -40,14 +40,14 @@ urlpatterns = [
             template_name='authentication/password_change_form.html',
             success_url='/password-changed'
         ),
-        name='change-password'
+        name='change_password'
     ),
     path(
         "password-changed/",
         auth_views.PasswordChangeDoneView.as_view(
             template_name='authentication/password_change_done.html'
         ),
-        name='password-changed'
+        name='password_changed'
     ),
     path("home/", blog.views.home, name="home")
 ]
