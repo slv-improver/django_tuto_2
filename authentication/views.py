@@ -44,18 +44,18 @@ def login_page(req):
         {'form': form, 'message': message}
     )
 
-def change_password(req, loggedin_user):
+def change_password(req, username):
     if req.method == 'POST':
         form = forms.UpdatePasswordForm(req.POST)
         if form.is_valid():
             user = authenticate(
-                username=loggedin_user.username,
+                username=username,
                 password=form.cleaned_data['old_password']
             )
             if user is not None:
-                user.set_password(form.new_password)
+                user.set_password(form.cleaned_data['new_password'])
                 user.save()
-                password_changed()
+                return redirect('home')
     else:
         form = forms.UpdatePasswordForm()
     return render(
@@ -63,6 +63,3 @@ def change_password(req, loggedin_user):
         'authentication/password_change_form.html',
         {'form': form}
     )
-
-def password_changed(req):
-    pass
