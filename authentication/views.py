@@ -56,11 +56,17 @@ def change_password(req, username):
                 user.set_password(form.cleaned_data['new_password'])
                 user.save()
                 login(req, user)
-                return redirect('home')
+                return redirect('password_changed')
     else:
         form = forms.UpdatePasswordForm()
     return render(
         req,
         'authentication/password_change_form.html',
         {'form': form}
+    )
+
+def password_changed(req):
+    return render(
+        req,
+        'authentication/password_changed.html'
     )
