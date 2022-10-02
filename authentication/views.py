@@ -53,7 +53,7 @@ def change_password(req, loggedin_user):
                 password=form.cleaned_data['old_password']
             )
             if user is not None:
-                user.password = form.new_password
+                user.set_password(form.new_password)
                 user.save()
                 password_changed()
     else:
