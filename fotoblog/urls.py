@@ -23,5 +23,7 @@ urlpatterns = [
     path("", authentication.views.login_page, name="login"),
     path("signup/", authentication.views.signup_page, name="signup"),
     path("logout/", authentication.views.logout_user, name="logout"),
+    path("change-password/", authentication.views.change_password, name="change_password"),
+    path("password-changed/", authentication.views.password_changed, name="password_changed"),
     path("home/", blog.views.home, name="home")
 ]

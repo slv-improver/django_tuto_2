@@ -10,3 +10,8 @@ class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'first_name', 'last_name', 'role')
+
+class UpdatePasswordForm(forms.Form):
+    old_password = forms.CharField(max_length=63, widget=forms.PasswordInput, label='Old password')
+    new_password = forms.CharField(max_length=63, widget=forms.PasswordInput, label='New password')
+    new_password_confirmation = forms.CharField(max_length=63, widget=forms.PasswordInput, label='Confirmation')
