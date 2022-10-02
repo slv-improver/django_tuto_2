@@ -55,6 +55,7 @@ def change_password(req, username):
             if user is not None:
                 user.set_password(form.cleaned_data['new_password'])
                 user.save()
+                login(req, user)
                 return redirect('home')
     else:
         form = forms.UpdatePasswordForm()
