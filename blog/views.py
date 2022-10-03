@@ -24,3 +24,6 @@ def photo_upload(req):
         'blog/photo_upload.html',
         {'form': form}
     )
+
+def change_photo(req):
+    pass
