@@ -1,0 +1,50 @@
+body {
+    background: #e1e1ff;
+}
+
+header {
+    padding: 10px;
+    background: #044a83;
+    color: antiquewhite;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+}
+
+header menu {
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 10px;
+}
+
+li {
+    margin-top: 10px;
+}
+
+header a, header a:visited {
+    color: antiquewhite;
+    text-decoration: none;
+    border-left: white 1px solid;
+    border-right: white 1px solid;
+    padding: 3px;
+}
+
+main {
+    padding: 10px;
+    margin-left: 220px;
+}
+
+.photos-list {
+    display: flex;
+}
+
+img {
+    max-width: 100%;
+    width: 300px;
+    border-radius: 5px;
+}

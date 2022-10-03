@@ -4,13 +4,15 @@
 <h2>Photos</h2>
 <a href="{% url 'photo_upload' %}">Upload new photo</a>
 
-{% for photo in photos %}
-<figure>
-    <img src="{{ photo.image.url }}">
-    <figcaption>{{ photo.caption }}</figcaption>
-</figure>
-{% endfor %}
+<div class="photos-list">
 
-<p>You're connected !</p>
-<p><a href="{% url 'change_password' user.username %}">Update password</a></p>
+    {% for photo in photos %}
+    <figure>
+        <img src="{{ photo.image.url }}">
+        <figcaption>{{ photo.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+
+</div>
+
 {% endblock content %}
