@@ -70,3 +70,6 @@ def password_changed(req):
         req,
         'authentication/password_changed.html'
     )
+
+def upload_profile_photo(req):
+    pass
