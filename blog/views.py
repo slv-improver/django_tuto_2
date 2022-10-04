@@ -6,7 +6,8 @@ from . import models
 @login_required
 def home(r):
     photos = models.Photo.objects.all()
-    return render(r, 'blog/home.html', {'photos': photos})
+    blogs = models.Blog.objects.all()
+    return render(r, 'blog/home.html', {'photos': photos, 'blogs': blogs})
 
 @login_required
 def blog_and_photo_upload(req):

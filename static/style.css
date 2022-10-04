@@ -39,8 +39,15 @@ main {
     margin-left: 220px;
 }
 
-.photos-list {
+.blog-list {
     display: flex;
+}
+
+.post {
+    border: 1px #044a83 solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
 }
 
 img {

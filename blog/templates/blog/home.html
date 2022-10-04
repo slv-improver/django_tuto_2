@@ -1,16 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Photos</h2>
+<h2>Blog</h2>
 <a href="{% url 'create_post' %}">Create new post</a>
 
-<div class="photos-list">
+<div class="blog-list">
 
-    {% for photo in photos %}
-    <figure>
-        <img src="{{ photo.image.url }}">
-        <figcaption>{{ photo.caption }}</figcaption>
-    </figure>
+    {% for blog in blogs %}
+    <div class="post">
+        <a href="{% url 'blog_post' blog.id %}">
+            <h2>{{ blog.title }}</h2>
+            <img src="{{ blog.photo.image.url }}">
+        </a>
+    </div>
     {% endfor %}
 
 </div>
