@@ -72,4 +72,15 @@ def password_changed(req):
     )
 
 def upload_profile_photo(req):
-    pass
+    if req.method == 'POST':
+        form = forms.UploadProfilePhotoForm(req.POST, req.FILES, instance=req.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = forms.UploadProfilePhotoForm(instance=req.user)
+    return render(
+        req,
+        'authentication/upload_profile_photo.html',
+        {'form': form}
+    )
