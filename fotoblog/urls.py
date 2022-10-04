@@ -28,7 +28,7 @@ urlpatterns = [
     path("change-password/<str:username>", authentication.views.change_password, name="change_password"),
     path("password-changed/", authentication.views.password_changed, name="password_changed"),
     path("home/", blog.views.home, name="home"),
-    path("upload/photo/", blog.views.photo_upload, name='photo_upload'),
+    path("blog/create/", blog.views.blog_and_photo_upload, name='create_post'),
     path("profile/photo/", authentication.views.upload_profile_photo, name='profile_photo'),
 ]
 if settings.DEBUG:

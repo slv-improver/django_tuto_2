@@ -9,18 +9,24 @@ def home(r):
     return render(r, 'blog/home.html', {'photos': photos})
 
 @login_required
-def photo_upload(req):
+def blog_and_photo_upload(req):
     if req.method == 'POST':
-        form = forms.PhotoForm(req.POST, req.FILES)
-        if form.is_valid():
-            photo = form.save(commit=False)
+        blog_form = forms.BlogForm(req.POST)
+        photo_form = forms.PhotoForm(req.POST, req.FILES)
+        if all([blog_form.is_valid(), photo_form.is_valid()]):
+            photo = photo_form.save(commit=False)
             photo.uploader = req.user
             photo.save()
+            blog = blog_form.save(commit=False)
+            blog.author = req.user
+            blog.photo = photo
+            blog.save()
             return redirect('home')
     else:
-        form = forms.PhotoForm()
+        blog_form = forms.BlogForm()
+        photo_form = forms.PhotoForm()
     return render(
         req,
-        'blog/photo_upload.html',
-        {'form': form}
+        'blog/create_blog_post.html',
+        {'blog_form': blog_form, 'photo_form': photo_form}
     )
