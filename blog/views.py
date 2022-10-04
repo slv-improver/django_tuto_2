@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . import forms
 from . import models
@@ -29,4 +29,12 @@ def blog_and_photo_upload(req):
         req,
         'blog/create_blog_post.html',
         {'blog_form': blog_form, 'photo_form': photo_form}
+    )
+
+def blog_post(req, blog_id):
+    blog = get_object_or_404(models.Blog, id=blog_id)
+    return render(
+        req,
+        'blog/blog_post.html',
+        {'blog': blog}
     )

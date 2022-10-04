@@ -27,9 +27,10 @@ urlpatterns = [
     path("logout/", authentication.views.logout_user, name="logout"),
     path("change-password/<str:username>", authentication.views.change_password, name="change_password"),
     path("password-changed/", authentication.views.password_changed, name="password_changed"),
+    path("profile/photo/", authentication.views.upload_profile_photo, name='profile_photo'),
     path("home/", blog.views.home, name="home"),
     path("blog/create/", blog.views.blog_and_photo_upload, name='create_post'),
-    path("profile/photo/", authentication.views.upload_profile_photo, name='profile_photo'),
+    path("blog/<int:blog_id>", blog.views.blog_post, name='blog_post'),
 ]
 if settings.DEBUG:
     urlpatterns += static(
