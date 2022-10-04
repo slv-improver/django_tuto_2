@@ -6,13 +6,13 @@ class User(AbstractUser):
     SUBSCRIBER = 'SUBSCRIBER'
 
     ROLE_CHOICES = (
-        (CREATOR, 'Créateur'),
-        (SUBSCRIBER, 'Abonné'),
+        (CREATOR, 'Creator'),
+        (SUBSCRIBER, 'Subscriber'),
     )
 
-    profile_photo = models.ImageField(verbose_name='Photo de profil')
+    profile_photo = models.ImageField(verbose_name='Profile photo')
     role = models.CharField(
         max_length=30,
         choices=ROLE_CHOICES,
-        verbose_name='Rôle'
+        verbose_name='Role'
     )
