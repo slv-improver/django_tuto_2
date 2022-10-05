@@ -44,12 +44,12 @@ def login_page(req):
         {'form': form, 'message': message}
     )
 
-def change_password(req, username):
+def change_password(req):
     if req.method == 'POST':
         form = forms.UpdatePasswordForm(req.POST)
         if form.is_valid():
             user = authenticate(
-                username=username,
+                username=req.user.username,
                 password=form.cleaned_data['old_password']
             )
             if user is not None:
