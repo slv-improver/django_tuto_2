@@ -8,6 +8,7 @@
 <body>
     <header>
         <h1>FotoBlog</h1>
+        {% if user.is_authenticated %}
         <p>Hi, {{ user }}!</p>
         {% if user.profile_photo %}
         <img src="{{ user.profile_photo.url }}" alt="Profile photo" />
@@ -23,6 +24,7 @@
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
         </menu>
+        {% endif %}
     </header>
     <main>
         {% block content %}{% endblock %}
