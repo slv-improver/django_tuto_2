@@ -11,6 +11,7 @@
         <a href="{% url 'blog_post' blog.id %}">
             <h2>{{ blog.title }}</h2>
             <img src="{{ blog.photo.image.url }}">
+            <p>{{ blog.word_count }} words</p>
         </a>
     </div>
     {% endfor %}
