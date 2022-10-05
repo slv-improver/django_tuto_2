@@ -2,6 +2,7 @@
 
 {% block content %}
 <h2>{{ blog.title }}</h2>
+<a href="{% url 'edit_post' blog.id %}">Edit post</a>
 <figure>
     <img src="{{ blog.photo.image.url }}" />
     <figcaption>{{ blog.photo.caption }}</figcaption>

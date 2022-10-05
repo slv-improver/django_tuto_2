@@ -39,3 +39,28 @@ def blog_post(req, blog_id):
         'blog/blog_post.html',
         {'blog': blog}
     )
+
+def edit_post(req, blog_id):
+    blog = get_object_or_404(models.Blog, id=blog_id)
+    if req.method == 'POST':
+        if 'edit_blog' in req.POST:
+            edit_form = forms.BlogForm(req.POST, instance=blog)
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('blog_post', blog_id=blog_id)
+        elif 'delete_blog' in req.POST:
+            delete_form = forms.DeleteBlogForm(req.POST)
+            if delete_form.is_valid():
+                blog.delete()
+                return redirect('home')
+    else:
+        edit_form = forms.BlogForm(instance=blog)
+        delete_form = forms.DeleteBlogForm()
+    return render(
+        req,
+        'blog/edit_blog.html',
+        {
+            'edit_form': edit_form,
+            'delete_form': delete_form
+        }
+    )
