@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from . import forms
 from . import models
 
@@ -42,6 +42,7 @@ def blog_post(req, blog_id):
     )
 
 @login_required
+@permission_required('blog.change_blog', raise_exception=True)
 def edit_post(req, blog_id):
     blog = get_object_or_404(models.Blog, id=blog_id)
     if req.method == 'POST':
