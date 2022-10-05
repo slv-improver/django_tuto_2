@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.forms import formset_factory
 from . import forms
 from . import models
 
@@ -30,6 +31,26 @@ def blog_and_photo_upload(req):
         req,
         'blog/create_blog_post.html',
         {'blog_form': blog_form, 'photo_form': photo_form}
+    )
+
+@login_required
+def upload_multiple_photo(req):
+    PhotoFormSet = formset_factory(forms.PhotoForm, extra=5)
+    if req.method == 'POST':
+        formset = PhotoFormSet(req.POST, req.FILE)
+        if formset.is_valid():
+            for form in formset:
+                if form.cleaned_data:
+                    photo = form.save(commit=False)
+                    photo.uploader = req.user
+                    photo.save()
+            return redirect('home')
+    else:
+        formset = PhotoFormSet()
+    return  render(
+        req,
+        'blog/upload_multiple_photos.html',
+        {'formset': formset}
     )
 
 def blog_post(req, blog_id):
