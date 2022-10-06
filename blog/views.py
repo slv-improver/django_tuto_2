@@ -10,6 +10,7 @@ def home(r):
     return render(r, 'blog/home.html', {'photos': photos, 'blogs': blogs})
 
 @login_required
+@permission_required('blog.add_blog', raise_exception=True)
 def blog_and_photo_upload(req):
     if req.method == 'POST':
         blog_form = forms.BlogForm(req.POST)
@@ -33,6 +34,7 @@ def blog_and_photo_upload(req):
     )
 
 @login_required
+@permission_required('blog.view_blog', raise_exception=True)
 def blog_post(req, blog_id):
     blog = get_object_or_404(models.Blog, id=blog_id)
     return render(

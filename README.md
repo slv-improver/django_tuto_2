@@ -18,3 +18,6 @@ To add permissions to Users, in django shell:</br>
 - `user = User.objects.get(username='algor')`
 - `permission = Permission.objects.get(codename='add_blog')`
 - `user.user_permissions.add(permission)`
+
+To create a personnalized migration, run:
+`./manage.py makemigrations --empty authentication`
