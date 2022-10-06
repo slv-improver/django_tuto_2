@@ -4,6 +4,7 @@ from . import forms
 from . import models
 
 @login_required
+@permission_required('blog.view_blog', raise_exception=True)
 def home(r):
     photos = models.Photo.objects.all()
     blogs = models.Blog.objects.all()
@@ -44,7 +45,7 @@ def blog_post(req, blog_id):
     )
 
 @login_required
-@permission_required('blog.change_blog', raise_exception=True)
+@permission_required(['blog.change_blog'], raise_exception=True)
 def edit_post(req, blog_id):
     blog = get_object_or_404(models.Blog, id=blog_id)
     if req.method == 'POST':

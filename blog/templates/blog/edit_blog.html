@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if perms.blog.change_blog %}
 <h2>Edit post</h2>
 <form method="post">
     {{ edit_form.as_p }}
@@ -8,10 +9,13 @@
     <button type="submit" >Save</button>
 </form>
 <hr>
+{% endif %}
+{% if perms.blog.delete_blog %}
 <h3>Delete post?</h3>
 <form method="post">
     {{ delete_form }}
     {% csrf_token %}
     <button type="submit" >Delete</button>
 </form>
+{% endif %}
 {% endblock content %}
