@@ -21,3 +21,12 @@ To add permissions to Users, in django shell:</br>
 
 To create a personnalized migration, run:
 `./manage.py makemigrations --empty authentication`
+
+Custom permissions:
+```py
+class Blog:
+    class Meta:
+        permissions = [
+            ('change_blog_title', 'Can edit post blog title')
+        ]
+```
