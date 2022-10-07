@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Follow users</h2>
+<form method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+</form>
+
+<h2>Following</h2>
+You follow : 
+<ul>
+    {% for following in user.follows.all %}
+    <li>{{ following }}</li>
+    {% endfor %}
+</ul>
+{% endblock content %}

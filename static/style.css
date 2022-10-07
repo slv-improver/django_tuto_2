@@ -17,12 +17,12 @@ header menu {
     padding: 10px;
 }
 
-ul {
+header ul {
     list-style: none;
     padding: 10px;
 }
 
-li {
+header li {
     margin-top: 10px;
 }
 

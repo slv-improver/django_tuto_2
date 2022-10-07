@@ -70,3 +70,20 @@ def edit_post(req, blog_id):
             'delete_form': delete_form
         }
     )
+
+@login_required
+def follow_users(req):
+    if req.method == 'POST':
+        form = forms.FollowUsersForm(req.POST, instance=req.user)
+        print(form.is_valid())
+        print(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = forms.FollowUsersForm()
+    return render(
+        req,
+        'blog/follow_users_form.html',
+        {'form': form}
+    )
