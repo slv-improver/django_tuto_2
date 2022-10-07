@@ -16,6 +16,12 @@ class User(AbstractUser):
         choices=ROLE_CHOICES,
         verbose_name='Role'
     )
+    follows = models.ManyToManyField(
+        'self',
+        limit_choices_to={'role': CREATOR},
+        symmetrical=False,
+        verbose_name='follows'
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
