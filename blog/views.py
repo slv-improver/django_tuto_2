@@ -24,6 +24,10 @@ def blog_and_photo_upload(req):
             blog.author = req.user
             blog.photo = photo
             blog.save()
+            blog.contributors.add(
+                req.user,
+                through_defaults={'contribution': 'Main author'}
+            )
             return redirect('home')
     else:
         blog_form = forms.BlogForm()
