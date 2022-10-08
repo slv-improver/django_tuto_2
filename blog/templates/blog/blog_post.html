@@ -2,6 +2,12 @@
 
 {% block content %}
 <h2>{{ blog.title }}</h2>
+<p>/ 
+    {% for contributor in blog.contributors.all %}
+    {{ contributor }} /
+    {% endfor %}
+</p>
+
 {% if perms.blog.change_blog %}
 <a href="{% url 'edit_post' blog.id %}">Edit post</a>
 {% endif %}
