@@ -56,7 +56,12 @@ def edit_post(req, blog_id):
         if 'edit_blog' in req.POST:
             edit_form = forms.BlogForm(req.POST, instance=blog)
             if edit_form.is_valid():
-                edit_form.save()
+                blog = edit_form.save(commit=False)
+                blog.contributors.add(
+                    req.user,
+                    through_defaults={'contribution': 'contributor'}
+                )
+                blog.save()
                 return redirect('blog_post', blog_id=blog_id)
         elif 'delete_blog' in req.POST:
             delete_form = forms.DeleteBlogForm(req.POST)
