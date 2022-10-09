@@ -6,9 +6,18 @@ from . import models
 @login_required
 @permission_required('blog.view_blog', raise_exception=True)
 def home(r):
-    photos = models.Photo.objects.all()
-    blogs = models.Blog.objects.all()
-    return render(r, 'blog/home.html', {'photos': photos, 'blogs': blogs})
+    blogs = models.Blog.objects.filter(
+        contributors__in=r.user.follows.all()
+    )
+    # photos = models.Photo.objects.filter(
+    #     uploader__in=r.user.follows.all()
+    # ).exclude(
+    #     blog__in=blogs
+    # )
+    return render(r, 'blog/home.html', {
+        'blogs': blogs,
+        # 'photos': photos
+    })
 
 @login_required
 @permission_required('blog.add_blog', raise_exception=True)
