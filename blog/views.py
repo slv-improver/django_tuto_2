@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
+from django.db.models import Q
 from . import forms
 from . import models
 
@@ -7,8 +8,8 @@ from . import models
 @permission_required('blog.view_blog', raise_exception=True)
 def home(r):
     blogs = models.Blog.objects.filter(
-        contributors__in=r.user.follows.all()
-    )
+        Q(contributors__in=r.user.follows.all()) | Q(starred=True)
+    ).order_by('-date_created')
     # photos = models.Photo.objects.filter(
     #     uploader__in=r.user.follows.all()
     # ).exclude(
