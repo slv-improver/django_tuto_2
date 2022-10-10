@@ -20,7 +20,7 @@
                     and written by {% get_poster_display blog.contributors.first %}
                 </p>
                 <p>
-                    Published {% blog.date_created|get_posted_at_display %}
+                    Published {{ blog.date_created|get_posted_at_display }}
                 </p>
             </a>
         </div>
