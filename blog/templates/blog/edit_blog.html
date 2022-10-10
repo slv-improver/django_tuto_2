@@ -3,7 +3,7 @@
 {% block content %}
 {% if perms.blog.change_blog %}
 <h2>Edit post</h2>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {{ edit_blog_form.as_p }}
     {{ edit_photo_form.as_p }}
     {% csrf_token %}
