@@ -4,7 +4,8 @@
 {% if perms.blog.change_blog %}
 <h2>Edit post</h2>
 <form method="post">
-    {{ edit_form.as_p }}
+    {{ edit_blog_form.as_p }}
+    {{ edit_photo_form.as_p }}
     {% csrf_token %}
     <button type="submit" >Save</button>
 </form>

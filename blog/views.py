@@ -62,15 +62,24 @@ def blog_post(req, blog_id):
 @permission_required(['blog.change_blog'], raise_exception=True)
 def edit_post(req, blog_id):
     blog = get_object_or_404(models.Blog, id=blog_id)
+    photo = blog.photo
     if req.method == 'POST':
         if 'edit_blog' in req.POST:
-            edit_form = forms.BlogForm(req.POST, instance=blog)
-            if edit_form.is_valid():
-                blog = edit_form.save(commit=False)
+            print(req.POST)
+            edit_blog_form = forms.BlogForm(req.POST, instance=blog)
+            edit_photo_form = forms.PhotoForm(req.POST, req.FILES, instance=photo)
+            if all([edit_blog_form.is_valid(), edit_photo_form.is_valid()]):
+                photo = edit_photo_form.save(commit=False)
+                print(photo.image)
+                photo.uploader = req.user
+                photo.save()
+                print(photo.image)
+                blog = edit_blog_form.save(commit=False)
                 blog.contributors.add(
                     req.user,
                     through_defaults={'contribution': 'contributor'}
                 )
+                blog.photo = photo
                 blog.save()
                 return redirect('blog_post', blog_id=blog_id)
         elif 'delete_blog' in req.POST:
@@ -79,13 +88,15 @@ def edit_post(req, blog_id):
                 blog.delete()
                 return redirect('home')
     else:
-        edit_form = forms.BlogForm(instance=blog)
+        edit_blog_form = forms.BlogForm(instance=blog)
+        edit_photo_form = forms.PhotoForm(instance=photo)
         delete_form = forms.DeleteBlogForm()
     return render(
         req,
         'blog/edit_blog.html',
         {
-            'edit_form': edit_form,
+            'edit_blog_form': edit_blog_form,
+            'edit_photo_form': edit_photo_form,
             'delete_form': delete_form
         }
     )
