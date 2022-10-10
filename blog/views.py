@@ -70,10 +70,8 @@ def edit_post(req, blog_id):
             edit_photo_form = forms.PhotoForm(req.POST, req.FILES, instance=photo)
             if all([edit_blog_form.is_valid(), edit_photo_form.is_valid()]):
                 photo = edit_photo_form.save(commit=False)
-                print(photo.image)
                 photo.uploader = req.user
                 photo.save()
-                print(photo.image)
                 blog = edit_blog_form.save(commit=False)
                 blog.contributors.add(
                     req.user,
