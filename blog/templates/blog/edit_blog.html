@@ -2,21 +2,21 @@
 
 {% block content %}
 {% if perms.blog.change_blog %}
-<h2>Edit post</h2>
-<form method="post" enctype="multipart/form-data">
-    {{ edit_blog_form.as_p }}
-    {{ edit_photo_form.as_p }}
-    {% csrf_token %}
-    <button type="submit" >Save</button>
-</form>
-<hr>
+    <h2>Edit post</h2>
+    <form method="post" enctype="multipart/form-data">
+        {{ edit_blog_form.as_p }}
+        {{ edit_photo_form.as_p }}
+        {% csrf_token %}
+        <button type="submit" >Save</button>
+    </form>
+    <hr>
 {% endif %}
 {% if perms.blog.delete_blog %}
-<h3>Delete post?</h3>
-<form method="post">
-    {{ delete_form }}
-    {% csrf_token %}
-    <button type="submit" >Delete</button>
-</form>
+    <h2>Delete post?</h2>
+    <form method="post">
+        {{ delete_form }}
+        {% csrf_token %}
+        <button type="submit" >Delete</button>
+    </form>
 {% endif %}
 {% endblock content %}

@@ -20,8 +20,8 @@ def get_posted_at_display(time):
     if posted_before.days > 6:
         return f'at {time.strftime("%H:%M %d-%b-%y")}'
     elif posted_before.days > 0:
-        return f'before {posted_before.days} d'
+        return f'before {posted_before.days}d'
     elif posted_before.seconds > 3599:
-        return f'before {posted_before.seconds // 3600} h'
+        return f'before {posted_before.seconds // 3600}h'
     else:
-        return f'before {posted_before.seconds // 60} min'
+        return f'before {posted_before.seconds // 60}min'

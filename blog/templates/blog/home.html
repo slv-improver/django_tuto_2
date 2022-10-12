@@ -4,7 +4,7 @@
 {% block content %}
 <h2>Blog</h2>
 {% if perms.blog.add_blog %}
-<a href="{% url 'create_post' %}">Create new post</a>
+    <a href="{% url 'create_post' %}">Create new post</a>
 {% endif %}
 
 <div class="blog-list">
@@ -20,8 +20,8 @@
 <div class="pagination">
     <span>
         {% if page_obj.has_previous %}
-        <a href="?page=1"><< First</a>
-        <a href="?page={{ page_obj.previous_page_number }}">< Previous</a>
+            <a href="?page=1"><< First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">< Previous</a>
         {% endif %}
     </span>
     <span>
@@ -29,8 +29,8 @@
     </span>
     <span>
         {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">Next ></a>
-        <a href="?page={{ page_obj.paginator.num_pages }}">End >></a>
+            <a href="?page={{ page_obj.next_page_number }}">Next ></a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">End >></a>
         {% endif %}
     </span>
 </div>

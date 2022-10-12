@@ -5,7 +5,7 @@
 <p>/ {{ blog.contributors.all|join:" / " }} /</p>
 
 {% if perms.blog.change_blog %}
-<a href="{% url 'edit_post' blog.id %}">Edit post</a>
+    <a href="{% url 'edit_post' blog.id %}">Edit post</a>
 {% endif %}
 <figure>
     <img src="{{ blog.photo.image.url }}" />
